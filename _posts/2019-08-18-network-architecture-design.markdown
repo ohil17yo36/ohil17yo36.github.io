@@ -44,7 +44,12 @@ Devices in 'P' zone face the external internet
 ### Connectivity requirement submission
 How do application developers of the firm submit their connectivity requirement ?
 
-In light of the recent `infrastructure as code` theme, we have come up with a `domain specific language` using a parser generator called `Antlr`
+##### Connectivity requirement format
+We need a list of connections (represented as Quadruples) which the platform is going to whitelist for the app developers
+1. Source IP/Subnet
+2. Destination IP/Subnet
+3. Port
+4. Protocol
 
 
 <!--
