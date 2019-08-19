@@ -23,7 +23,8 @@ Imagine you are tasked to design the `network architecture` of a firm.
 2. `Blacklist` all connections between device across layers by default
 3. Have a mechanism to `whitelist connections` as need arises.
 
-### Network Architecture
+
+## Network Architecture
 
 ![Zones](/resources/zones.png)
 
@@ -31,6 +32,20 @@ Imagine you are tasked to design the `network architecture` of a firm.
 - P : Perimeter
 - I : Intermediate
 - S : Safe
+
+Devices in 'S' zone are the most secure
+
+Devices in 'I' zone are less secure
+
+Devices in 'P' zone face the external internet
+
+
+
+### Connectivity requirement submission
+How do application developers of the firm submit their connectivity requirement ?
+
+In light of the recent `infrastructure as code` theme, we have come up with a `domain specific language` using a parser generator called `Antlr`
+
 
 <!--
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
