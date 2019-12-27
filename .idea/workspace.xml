@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b35993f2-87e9-4f4c-9f6b-463c19a42c1d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +31,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="432">
-                <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
+              <first_editor relative-caret-position="477">
+                <caret line="115" column="61" selection-start-line="115" selection-start-column="61" selection-end-line="115" selection-end-column="61" />
                 <folding>
                   <element signature="e#122#123#0" expanded="true" />
                   <element signature="e#172#173#0" expanded="true" />
@@ -316,8 +315,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="432">
-            <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
+          <first_editor relative-caret-position="477">
+            <caret line="115" column="61" selection-start-line="115" selection-start-column="61" selection-end-line="115" selection-end-column="61" />
             <folding>
               <element signature="e#122#123#0" expanded="true" />
               <element signature="e#172#173#0" expanded="true" />
