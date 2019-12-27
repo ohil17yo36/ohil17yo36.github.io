@@ -37,6 +37,9 @@ public abstract class RateLimiter {
 2. We have a method interface called `allow()` that returns a boolean which tells the caller whether this request is allowed or dropped by the gateway
 
 ## Testing
+Assume you have a rate limiter implemented and given to you, what sort of testing framework would you use to evaluate its performance ?
+
+Here is one way below
 ```java
 public class Solution {
     
@@ -115,7 +118,10 @@ Now let's look at each `sendRequest()` test
 8. Best way to ensure that is to use a `CountDownLatch` and let the main thread wait till all the threads have decremented the latch to zero.
 9. The remaining part is simply measuring `execution metrics` and printing to the console.
 
-## Policies
+## Implementations
+
+Below are top implementations of algorithms of rate limiter abstract class
+
 [Credits](https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/)
 ### Leaky Bucket Algorithm
 
@@ -238,3 +244,41 @@ public static class FixedWindowCounterRateLimiter extends RateLimiter {
 1. We first create a map whose `key` is the `time interval index` and `value` is the `number of requests` in that window
 2. In the allow method we first get the time interval index and check for that time interval whether we have requests remaining.
 3. Then we atomically increment the value before sending out the result;
+
+### Sliding Window Log algorithm
+In this algorithm, we move the window used in the previous algorithm with us in real time.
+
+So if we receive a request, we make sure that in the time window \[current-time - 60, current-time\] we have not exceeded the limit on the number of requests
+
+Implementation below
+```java
+public static class SlidingLogRateLimiter extends RateLimiter {
+ 
+    private final Queue<Long> q;
+
+    public SlidingLogRateLimiter(int maxRequestPerSecond) {
+        super(maxRequestPerSecond);
+        q = new LinkedList();
+    }
+
+    public boolean allow() {
+        long currentTime = System.currentTimeMillis();
+        long boundary = currentTime - 60;
+        synchronized(this) {
+            while(!q.isEmpty() && q.peek()<boundary) {
+                q.remove();
+            }
+
+            q.add(currentTime);
+
+            if(q.size() <= maxRequestPerSecond) {
+                return true;
+            }
+            return false;
+        }
+    }
+}
+```
+1. We maintain a `Queue` of all the incoming request timestamps
+2. The `allow()` method take the current time and clears all the requests that arrive before \(currentTime - 60\)
+3. Finally it adds the current request time to the queue and checks whether the queue's size is lesser than the maximum requests per second
