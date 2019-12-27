@@ -128,6 +128,41 @@ The bucket takes in requests and churns out responses
 If the capacity of the bucket is full, then the future incoming requests will simply be denied
 
 Implementation below
+```java
+public static class LeakyBucketRateLimiter extends RateLimiter {
+ 
+    private long nextAllowedTime;
+
+    private final long TIME_INTERVAL_BETWEEN_REQUESTS;
+
+    public LeakyBucketRateLimiter(int maxRequestPerSecond) {
+        super(maxRequestPerSecond);
+        TIME_INTERVAL_BETWEEN_REQUESTS = 1000/maxRequestPerSecond;
+        nextAllowedTime = System.currentTimeMillis();
+    }
+
+    public boolean allow() {
+        long currentTime = System.currentTimeMillis();
+        synchronized(this) {
+            if(currentTime>=nextAllowedTime) {
+                nextAllowedTime = currentTime + TIME_INTERVAL_BETWEEN_REQUESTS;
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
+```
+1. Maintain two variables `nextAllowedTime` and `TIME_INTERVAL_BETWEEN_REQUESTS`.
+2. TIME_INTERVAL_BETWEEN_REQUESTS = 1000/maxRequestPerSecond. Simple Math :\)
+3. Check if the current time is greater than next allowed time, if it is then allow the request or else reject it
+4. Keep updating next allowed time
+
+### Token Bucket Algorithm
+Assign a token to every request received.
+
+If there is an incoming request and there are no more tokens to give out then drop the request.
 
 ```java
 public static class TokenBucketRateLimiter extends RateLimiter {
@@ -167,7 +202,6 @@ public static class TokenBucketRateLimiter extends RateLimiter {
     }
 }
 ```
-
 1. Let numberOfTokens variable denote the current number of tokens in the bucket
 2. Each token in numberOfTokens is assigned to a request
 3. We need a background thread to keep refilling the bucket, so that maxRequestsPerSecond number of tokens are available in the bucket every second
