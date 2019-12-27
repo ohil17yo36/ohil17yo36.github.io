@@ -207,3 +207,34 @@ public static class TokenBucketRateLimiter extends RateLimiter {
 3. We need a background thread to keep refilling the bucket, so that maxRequestsPerSecond number of tokens are available in the bucket every second
 4. `refill()` function takes in the number of tokens to refill the bucket with
 5. `allow()` is implemented by checking if there are any tokens available to be handed out to the caller.
+
+
+### Fixed Window Algorithm
+We slice the timeline from 0 to infinity into small `time intervals of 60 seconds` each
+
+We make sure that in each interval, the number of requests do not exceed the total allowed number of requests in that interval
+
+Implementation below
+```java
+public static class FixedWindowCounterRateLimiter extends RateLimiter {
+ 
+    private final ConcurrentMap<Long, AtomicInteger> windowMap;
+
+    public FixedWindowCounterRateLimiter(int maxRequestPerSecond) {
+        super(maxRequestPerSecond);
+        this.windowMap = new ConcurrentHashMap();
+    }
+
+    public boolean allow() {
+        long currentTimeInMillis = System.currentTimeMillis();
+        long windowIndex = currentTimeInMillis/(60*1000);
+        windowMap.putIfAbsent(windowIndex, new AtomicInteger(0));
+        return windowMap.get(windowIndex).incrementAndGet() <= this.maxRequestPerSecond; 
+    }
+}
+
+```
+
+1. We first create a map whose `key` is the `time interval index` and `value` is the `number of requests` in that window
+2. In the allow method we first get the time interval index and check for that time interval whether we have requests remaining.
+3. Then we atomically increment the value before sending out the result;
