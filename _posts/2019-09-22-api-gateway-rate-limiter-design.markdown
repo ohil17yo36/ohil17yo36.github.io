@@ -5,20 +5,20 @@ date:   2019-09-22 13:26:47 -0700
 categories: api gateway rate limiter
 ---
 
-## High level requirement
+# High level requirement
 Imagine you are tasked to design an API gateway to `rate limit` your exposed public API's.
 
 
-## First thoughts
+# First thoughts
 1. Consider this as an algorithm question, How would you even design a `rate limiter`?
 2. What would be the input and output to such an algorithm?
 3. If you even have a rate limiter then how are we going to test it's performance on load?
 4. What are the different policies used in rate limiters?
 
-## Learnings
+# Learnings
 [Credits](https://hechao.li/2018/06/25/Rate-Limiter-Part1/)
 
-### Interface
+## Interface
 Let's first design the basic interface of a rate limiter
 
 ```java
@@ -36,7 +36,7 @@ public abstract class RateLimiter {
 1. We have an abstract class called RateLimiter which taken in the maximum allowed hit rate as it's constructor parameter.
 2. We have a method interface called `allow()` that returns a boolean which tells the caller whether this request is allowed or dropped by the gateway
 
-### Testing
+## Testing
 ```java
 public class Solution {
     
@@ -115,9 +115,9 @@ Now let's look at each `sendRequest()` test
 8. Best way to ensure that is to use a `CountDownLatch` and let the main thread wait till all the threads have decremented the latch to zero.
 9. The remaining part is simply measuring `execution metrics` and printing to the console.
 
-### Policies
+## Policies
 [Credits](https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/)
-1. Leaky Bucket Algorithm
+### Leaky Bucket Algorithm
 
 ![Algorithm](/resources/LeakyBucket.png)
 
