@@ -282,3 +282,46 @@ public static class SlidingLogRateLimiter extends RateLimiter {
 1. We maintain a `Queue` of all the incoming request timestamps
 2. The `allow()` method take the current time and clears all the requests that arrive before \(currentTime - 60\)
 3. Finally it adds the current request time to the queue and checks whether the queue's size is lesser than the maximum requests per second
+
+### Sliding Window Rate Limiting Algorithm
+This is very similar to the previous approach. 
+
+Instead of including each timestamp in the previous window, we simply maintain the previous windows request count. 
+
+When the window moves 25% away from previous window, then we include 75% of the previous window count  along with the requests we found so far to the total request count.
+
+Implementation below
+```java
+public static class SlidingWindowRateLimiter extends RateLimiter {
+ 
+    private final ConcurrentMap<Long, AtomicInteger> windowMap;
+
+    public SlidingWindowRateLimiter(int maxRequestPerSecond) {
+        super(maxRequestPerSecond);
+        this.windowMap = new ConcurrentHashMap();
+    }
+
+    public boolean allow() {
+        long currentTime = System.currentTimeMillis();
+        long currentWindowKey = currentTime / (1000*1000);
+
+        windowMap.putIfAbsent(currentWindowKey, new AtomicInteger(0));
+
+
+        long preWindowKey = currentWindowKey - 1000;
+        AtomicInteger preCount = windowMap.get(preWindowKey);
+        if(preCount == null) {
+            return windowMap.get(currentWindowKey).incrementAndGet() <= this.maxRequestPerSecond;
+        }
+
+        double preWeight = 1 - (currentTime - currentWindowKey) / 1000.0;
+        long count = (long) (preCount.get() * preWeight + windowMap.get(currentWindowKey).incrementAndGet());
+        return count <= maxRequestPerSecond;
+    }
+}
+```
+1. Maintain a map of `window index` as `key` and `number of requests` as `value`
+2. When the `allow()` method is called we first retrieve the window index from current time.
+3. We then retrieve the previous window key and the previous window count
+4. Then we determine how far into the current window we are, using which we determine the weights
+5. We then use the weights to get the weighted count and check if its below the allowed limit
