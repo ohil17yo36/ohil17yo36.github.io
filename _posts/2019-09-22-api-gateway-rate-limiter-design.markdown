@@ -102,6 +102,6 @@ Let's look at the main function
 1. First the main function initializes a rate limiter
 2. Second, the main function prepares a batch of tests. 
 3. Each `sendRequest()` method is a test. 
-4. It takes in the `rateLimiter` as first argument, ` total number of requests` as second argument, the `request rate`(requests per second) as the third argument
+4. It takes in the `rateLimiter` as first argument, `total number of requests` as second argument, the `request rate`(requests per second) as the third argument
 
 Now let's look at each `sendRequest()` test
