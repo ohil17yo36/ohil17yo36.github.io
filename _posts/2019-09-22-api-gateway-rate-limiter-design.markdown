@@ -102,6 +102,15 @@ Let's look at the main function
 1. First the main function initializes a rate limiter
 2. Second, the main function prepares a batch of tests. 
 3. Each `sendRequest()` method is a test. 
-4. It takes in the `rateLimiter` as first argument, `total number of requests` as second argument, the `request rate`(requests per second) as the third argument
+4. It takes in the `rateLimiter` as first argument,`total number of requests` as second argument, the `request rate`(requests per second) as the third argument
 
 Now let's look at each `sendRequest()` test
+1. The objective of this method is to launch `totalRequests` number of requests against the rate limiter at the `request rate` pace.
+2. To do that we can send each request after a time interval of (1000/requestRate) milliseconds (Simple math)
+3. This is achieved by iterating over a for loop and waiting for (1000/requestRate) milliseconds after every iteration
+4. In each iteration, if we simply launch a new thread that checks for the rate limiters allow() method to be true just once, then we are not replicating real testing scenario.
+5. In each iteration, the thread launched has to keep trying the allow() method of the rate limiter untill it returns true.
+6. Hence we use a while loop in the launched thread of each iteration
+7. Now, is that enough. Nope, because the main thread needs to wait till all the threads have finished execution.
+8. Best way to ensure that is to use a `CountDownLatch` and let the main thread wait till all the threads have decremented the latch to zero.
+9. The remaining part is simply measuring execution metrics and printing to the console.
