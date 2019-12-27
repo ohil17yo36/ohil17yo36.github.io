@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b35993f2-87e9-4f4c-9f6b-463c19a42c1d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +32,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="446">
-                <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+              <first_editor relative-caret-position="432">
+                <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
                 <folding>
                   <element signature="e#122#123#0" expanded="true" />
                   <element signature="e#172#173#0" expanded="true" />
@@ -229,7 +230,7 @@
       <window_info anchor="bottom" id="Tool Output" order="11" />
       <window_info anchor="bottom" id="ANTLR Preview" order="12" weight="0.32992035" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven" order="4" weight="0.3297414" />
@@ -315,8 +316,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="446">
-            <caret line="74" column="16" lean-forward="true" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+          <first_editor relative-caret-position="432">
+            <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
             <folding>
               <element signature="e#122#123#0" expanded="true" />
               <element signature="e#172#173#0" expanded="true" />
