@@ -114,3 +114,56 @@ Now let's look at each `sendRequest()` test
 7. Now, is that enough. Nope, because the main thread needs to wait till all the threads have finished execution.
 8. Best way to ensure that is to use a `CountDownLatch` and let the main thread wait till all the threads have decremented the latch to zero.
 9. The remaining part is simply measuring `execution metrics` and printing to the console.
+
+### Policies
+[Credits](https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/)
+1. Leaky Bucket Algorithm
+
+![Algorithm](/resources/LeakyBucket.png)
+
+In this algorithm, we have a bucket of limited capacity.
+
+The bucket takes in requests and churns out responses
+
+If the capacity of the bucket is full, then the future incoming requests will simply be denied
+
+Implementation below
+
+```java
+public static class TokenBucketRateLimiter extends RateLimiter {
+ 
+    private int numberOfTokens;
+
+    public TokenBucketRateLimiter(int maxRequestPerSecond) {
+        super(maxRequestPerSecond);
+        numberOfTokens = maxRequestPerSecond;
+        new Thread(() -> {
+            while(true) {
+                try{
+                    TimeUnit.SECONDS.sleep(1);
+                } catch(InterruptedException ie) {
+                    throw new RuntimeException(ie);
+                }
+                refill(numberOfTokens);
+            }
+        }).start();
+    }
+
+    public boolean allow() {
+        synchronized(this) {
+            if(numberOfTokens>0) {
+                numberOfTokens--;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private void refill(int cnt) {
+        synchronized(this) {
+            numberOfTokens = Math.min(numberOfTokens + cnt, this.maxRequestPerSecond);
+            notifyAll();
+        }
+    }
+}
+```
