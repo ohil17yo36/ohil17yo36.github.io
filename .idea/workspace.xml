@@ -32,8 +32,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="416">
-                <caret line="157" column="77" selection-start-line="157" selection-start-column="77" selection-end-line="157" selection-end-column="77" />
+              <first_editor relative-caret-position="491">
+                <caret line="211" selection-start-line="211" selection-end-line="211" />
                 <folding>
                   <element signature="e#122#123#0" expanded="true" />
                   <element signature="e#172#173#0" expanded="true" />
@@ -325,8 +325,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/2019-09-22-api-gateway-rate-limiter-design.markdown">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="416">
-            <caret line="157" column="77" selection-start-line="157" selection-start-column="77" selection-end-line="157" selection-end-column="77" />
+          <first_editor relative-caret-position="491">
+            <caret line="211" selection-start-line="211" selection-end-line="211" />
             <folding>
               <element signature="e#122#123#0" expanded="true" />
               <element signature="e#172#173#0" expanded="true" />
