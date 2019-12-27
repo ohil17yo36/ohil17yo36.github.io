@@ -243,6 +243,10 @@
     <MESSAGE value="First content&#10;&#10;Signed-off-by: ohil17yo36 &lt;ohileshwar17@gmail.com&gt;" />
     <option name="LAST_COMMIT_MESSAGE" value="First content&#10;&#10;Signed-off-by: ohil17yo36 &lt;ohileshwar17@gmail.com&gt;" />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/_site/feed.xml">
       <provider selected="true" editor-type-id="text-editor">
