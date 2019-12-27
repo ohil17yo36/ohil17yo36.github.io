@@ -167,3 +167,9 @@ public static class TokenBucketRateLimiter extends RateLimiter {
     }
 }
 ```
+
+1. Let numberOfTokens variable denote the current number of tokens in the bucket
+2. Each token in numberOfTokens is assigned to a request
+3. We need a background thread to keep refilling the bucket, so that maxRequestsPerSecond number of tokens are available in the bucket every second
+4. `refill()` function takes in the number of tokens to refill the bucket with
+5. `allow()` is implemented by checking if there are any tokens available to be handed out to the caller.
